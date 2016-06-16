@@ -15,6 +15,10 @@ The PigSolrDataStore can be configured using the following parameters:
 
 These parameters can be supplied to the PigSolrStore in any order.
 
+Run ```mvn clean install``` and inside the target directory find the PigSolrDataStore-x.x.x-jar-with-dependencies.jar. 
+
+
+
 Solr 4
 ------
 
