@@ -1,0 +1,19 @@
+# Ignore temporary build assets.
+target/
+src/main/java/com/jumptap/
+src/main/java/com/aol/domain/
+*.log
+
+# Eclipse generated project files
+.classpath
+.project
+.settings/
+test-output/
+
+# IntelliJ generated project files
+*.iml
+*.ipr
+*.iws
+atlassian-ide-plugin.xml
+.idea/
+
