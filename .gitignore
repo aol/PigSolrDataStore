@@ -1,6 +1,5 @@
 # Ignore temporary build assets.
 target/
-src/main/java/com/jumptap/
 src/main/java/com/aol/domain/
 *.log
 
