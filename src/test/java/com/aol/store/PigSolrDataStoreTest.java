@@ -2,6 +2,7 @@ package com.aol.store;
 
 import org.apache.pig.data.Tuple;
 import org.apache.pig.data.TupleFactory;
+import org.apache.solr.SolrTestCaseJ4;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer;
 import org.apache.solr.client.solrj.request.UpdateRequest;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by rushabhshroff on 6/8/16.
  */
-public class PigSolrDataStoreTest extends AbstractSolrTestCase {
+public class PigSolrDataStoreTest extends SolrTestCaseJ4 {
 
     private Collection setupBuffer(PigSolrStoreWriter writer, SolrConfigs solrConfigs) throws Exception {
         Field field = writer.getClass().getDeclaredField("documentsBuffer");
@@ -164,6 +165,8 @@ public class PigSolrDataStoreTest extends AbstractSolrTestCase {
 
     @Test
     public void testSolrIT() throws Exception {
+        setupSolrCore();
+
         PigSolrStoreWriter writer = setupMockSolrWriter(DataStoreType.SOLR4);
 
         SolrClient solrClient = getSolrClient();
@@ -177,13 +180,23 @@ public class PigSolrDataStoreTest extends AbstractSolrTestCase {
         Assert.assertTrue(document.get("title_s").equals("some_title"));
     }
 
-    @Override
-    public String getSchemaFile() {
+    private void setupSolrCore() throws Exception {
+        System.setProperty("solr.allow.unsafe.resourceloading", "true");
+
+        SolrTestCaseJ4.initCore(getSolrConfig(),
+                getSchema(),
+                getSolrHome());
+    }
+
+    private String getSolrHome() {
+        return System.getProperty("user.dir") + "/solr";
+    }
+
+    private String getSchema() {
         return System.getProperty("user.dir") + "/solr/conf/managed_schema";
     }
 
-    @Override
-    public String getSolrConfigFile() {
+    private String getSolrConfig() {
         return System.getProperty("user.dir") + "/solr/conf/solrconfig.xml";
     }
 }
