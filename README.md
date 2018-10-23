@@ -1,3 +1,5 @@
+**Please Note:** This repository contains known security vulnerabilities. Use at your own risk!
+
 Pig Solr Data Store
 ==============
 
